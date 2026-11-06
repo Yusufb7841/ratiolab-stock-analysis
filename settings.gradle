@@ -1,0 +1,4 @@
+rootProject.name = 'ratiolab'
+
+// The Spring Boot application. It also builds the React app in frontend/ and serves it.
+include 'backend'

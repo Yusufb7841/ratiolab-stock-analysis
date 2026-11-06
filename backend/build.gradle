@@ -1,0 +1,88 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.1.2'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'io.github.yusufb7841'
+version = '0.0.1-SNAPSHOT'
+description = 'RatioLab backend'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+// The built application is called ratiolab-<version>.jar
+base {
+	archivesName = 'ratiolab'
+}
+
+// ---------------------------------------------------------------------------
+// Frontend integration: Gradle builds the React app in ../frontend and packs
+// it into the Spring Boot application, which serves it on the same port as
+// the REST API. During development the Vite dev server can still be used.
+// ---------------------------------------------------------------------------
+def frontendDir = rootProject.file('frontend')
+def npm = System.getProperty('os.name').toLowerCase().contains('windows') ? 'npm.cmd' : 'npm'
+
+def npmInstall = tasks.register('npmInstall', Exec) {
+	group = 'frontend'
+	description = 'Installs the frontend dependencies exactly as locked (npm ci).'
+	workingDir = frontendDir
+	commandLine npm, 'ci', '--no-fund', '--no-audit'
+	inputs.files(new File(frontendDir, 'package.json'), new File(frontendDir, 'package-lock.json'))
+	outputs.dir(new File(frontendDir, 'node_modules'))
+}
+
+def frontendBuild = tasks.register('frontendBuild', Exec) {
+	group = 'frontend'
+	description = 'Builds the React frontend (npm run build).'
+	dependsOn npmInstall
+	workingDir = frontendDir
+	commandLine npm, 'run', 'build'
+	inputs.dir(new File(frontendDir, 'src'))
+	inputs.files(fileTree(frontendDir) { include '*.json', '*.ts', '*.js', 'index.html' })
+	outputs.dir(new File(frontendDir, 'dist'))
+}
+
+def frontendTest = tasks.register('frontendTest', Exec) {
+	group = 'verification'
+	description = 'Runs the frontend tests (npm test).'
+	dependsOn npmInstall
+	workingDir = frontendDir
+	commandLine npm, 'test'
+}
+
+// Spring Boot serves everything under classpath:/static at the root URL.
+tasks.named('processResources') {
+	dependsOn frontendBuild
+	from(new File(frontendDir, 'dist')) {
+		into 'static'
+	}
+}
+
+// `gradle build` / `gradle check` also run the frontend tests.
+tasks.named('check') {
+	dependsOn frontendTest
+}
+
+// Only the executable Spring Boot jar is needed, not the additional plain jar.
+tasks.named('jar') {
+	enabled = false
+}

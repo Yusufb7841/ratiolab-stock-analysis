@@ -7,7 +7,7 @@
 *Finanzdaten verstehen. Unternehmen vergleichen.*
 
 ![Status](https://img.shields.io/badge/Status-Planung_abgeschlossen-blue)
-![Implementierung](https://img.shields.io/badge/Implementierung-noch_nicht_begonnen-lightgrey)
+![Implementierung](https://img.shields.io/badge/Implementierung-Projektger%C3%BCst-lightgrey)
 ![Java](https://img.shields.io/badge/Backend-Java_%2B_Spring_Boot-6DB33F)
 ![React](https://img.shields.io/badge/Frontend-React_%2B_TypeScript-61DAFB)
 ![PostgreSQL](https://img.shields.io/badge/Datenbank-PostgreSQL-4169E1)
@@ -23,7 +23,7 @@ RatioLab entsteht im Rahmen einer Bachelorarbeit im Studiengang Informatik (B.Sc
 > **Entwicklung und Evaluation einer webbasierten Anwendung zur fundamentalen Aktienanalyse**
 
 > [!IMPORTANT]
-> **Die Implementierung hat noch nicht begonnen.** Anforderungen, Architektur und die Spezifikation der Daten und Kennzahlen sind ausgearbeitet. Es gibt noch **keinen Anwendungscode, keine Tests und keine lauffähige Anwendung**. Alle beschriebenen Funktionen sind **geplant**.
+> **Die Implementierung steht am Anfang.** Anforderungen, Architektur und die Spezifikation der Daten und Kennzahlen sind ausgearbeitet. Im Repository existiert bisher nur das **Projektgerüst** (Spring-Boot-Backend und React-Frontend ohne fachliche Funktionen). Alle beschriebenen Funktionen sind **geplant**, nicht umgesetzt.
 
 ## Inhalt
 
@@ -58,7 +58,8 @@ Der Schwerpunkt liegt auf Softwarearchitektur, zuverlässiger Datenverarbeitung,
 | Thema und Projektausrichtung | ✅ abgestimmt |
 | Anforderungen, Architektur, Daten- und Kennzahlenspezifikation | ✅ ausgearbeitet |
 | Praktische Prüfung der Datenquellen | ⏳ als Nächstes |
-| Backend, Frontend, Datenbank | ⬜ noch nicht begonnen |
+| Projektgerüst (Backend, Frontend) | ✅ angelegt |
+| Fachliche Funktionen, Datenbank | ⬜ noch nicht begonnen |
 | Datenimport | ⬜ noch nicht begonnen |
 | Automatisierte Tests | ⬜ noch nicht begonnen |
 | Evaluation | ⬜ noch nicht begonnen |
@@ -109,14 +110,14 @@ flowchart LR
 |---|---|---|
 | Frontend | React, TypeScript, Vite | festgelegt |
 | Diagramme | Apache ECharts | festgelegt |
-| Backend | Java, Spring Boot | festgelegt |
+| Backend | Java 25, Spring Boot 4.1.2 | festgelegt |
 | Build-Werkzeug (Backend) | Gradle (Gradle Wrapper) | festgelegt |
 | Schnittstelle | REST / JSON | festgelegt |
 | Datenbank | PostgreSQL | festgelegt |
 | Datenquellen | Alpha Vantage, SEC EDGAR | festgelegt |
 | Datenbankmigrationen | versionierte Migrationen, z. B. Flyway | vorgesehen |
 | Bereitstellung | containerisierte Einrichtung, z. B. Docker Compose | vorgesehen |
-| Tests | z. B. JUnit 5, Vitest, React Testing Library | vorgesehen |
+| Tests | JUnit 5, Vitest, React Testing Library | festgelegt |
 
 *festgelegt* = entschieden · *vorgesehen* = geplant, die endgültige Auswahl erfolgt mit der Implementierung.
 Quellcode und Code-Kommentare werden auf Englisch verfasst.
