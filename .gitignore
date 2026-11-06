@@ -1,0 +1,101 @@
+# ==========================================
+# Stock Analysis Application - Bachelor Thesis
+# ==========================================
+
+# ------------------------------------------
+# 1. Environment Variables & Secrets
+# ------------------------------------------
+.env
+.env.*
+!.env.example
+
+# API Keys and Credentials
+*.key
+*.pem
+secrets/
+credentials/
+
+# ------------------------------------------
+# 2. IntelliJ IDEA
+# ------------------------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# ------------------------------------------
+# 3. Java / Spring Boot / Gradle
+# ------------------------------------------
+.gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+*.class
+*.log
+hs_err_pid*
+replay_pid*
+
+# ------------------------------------------
+# 4. React / TypeScript / Vite
+# ------------------------------------------
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.tsbuildinfo
+vite.config.*.timestamp-*
+
+# ------------------------------------------
+# 5. IDE / Editor Settings
+# ------------------------------------------
+.vscode/
+.settings/
+.classpath
+.project
+
+# ------------------------------------------
+# 6. Operating System Files
+# ------------------------------------------
+.DS_Store
+.AppleDouble
+Thumbs.db
+Desktop.ini
+
+# ------------------------------------------
+# 7. Temporary Files
+# ------------------------------------------
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.cache/
+
+# ------------------------------------------
+# 8. Local Database / Runtime Files
+# ------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+*.pid
+
+# ------------------------------------------
+# 9. Python (Development Scripts)
+# ------------------------------------------
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+# ------------------------------------------
+# 10. Raw provider payloads (licensing restrictions)
+# ------------------------------------------
+local-data/
+
+# ------------------------------------------
+# 11. Private planning and thesis material (kept local, never published)
+# ------------------------------------------
+# Requirements, architecture, ADRs, roadmap, devlogs, evaluation plans
+/docs/
+# Exposé and Bachelorarbeit drafts
+/thesis/
