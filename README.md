@@ -23,7 +23,7 @@ RatioLab entsteht im Rahmen einer Bachelorarbeit im Studiengang Informatik (B.Sc
 > **Entwicklung und Evaluation einer webbasierten Anwendung zur fundamentalen Aktienanalyse**
 
 > [!IMPORTANT]
-> **Die Implementierung steht am Anfang.** Anforderungen, Architektur und die Spezifikation der Daten und Kennzahlen sind ausgearbeitet. Im Repository existiert bisher nur das **Projektgerüst** (Spring-Boot-Backend und React-Frontend ohne fachliche Funktionen). Alle beschriebenen Funktionen sind **geplant**, nicht umgesetzt.
+> **Die Implementierung steht am Anfang.** Anforderungen, Architektur und die Spezifikation der Daten und Kennzahlen sind ausgearbeitet. Umgesetzt sind bisher das **Projektgerüst** und ein **erster Durchstich**: ein Importbefehl lädt echte Tageskurse von Alpha Vantage, die Oberfläche zeigt sie als Diagramm mit Quelle und Datenstand. Alle übrigen beschriebenen Funktionen sind **geplant**, nicht umgesetzt.
 
 ## Inhalt
 
@@ -59,7 +59,8 @@ Der Schwerpunkt liegt auf Softwarearchitektur, zuverlässiger Datenverarbeitung,
 | Anforderungen, Architektur, Daten- und Kennzahlenspezifikation | ✅ ausgearbeitet |
 | Praktische Prüfung der Datenquellen | ⏳ als Nächstes |
 | Projektgerüst (Backend, Frontend) | ✅ angelegt |
-| Fachliche Funktionen, Datenbank | ⬜ noch nicht begonnen |
+| Erster Durchstich: Kursimport (Alpha Vantage) und Kursdiagramm | ✅ umgesetzt |
+| Finanzberichte (SEC EDGAR), Kennzahlen, Vergleich, Datenbank | ⬜ noch nicht begonnen |
 | Datenimport | ⬜ noch nicht begonnen |
 | Automatisierte Tests | ⬜ noch nicht begonnen |
 | Evaluation | ⬜ noch nicht begonnen |

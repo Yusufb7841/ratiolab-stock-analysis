@@ -82,6 +82,12 @@ tasks.named('check') {
 	dependsOn frontendTest
 }
 
+// Run from the repository root, where the local .env and local-data/ live.
+// Import example: ./gradlew bootRun --args="import-prices AAPL MSFT"
+tasks.named('bootRun') {
+	workingDir = rootProject.projectDir
+}
+
 // Only the executable Spring Boot jar is needed, not the additional plain jar.
 tasks.named('jar') {
 	enabled = false
