@@ -57,10 +57,11 @@ Der Schwerpunkt liegt auf Softwarearchitektur, zuverlässiger Datenverarbeitung,
 |---|---|
 | Thema und Projektausrichtung | ✅ abgestimmt |
 | Anforderungen, Architektur, Daten- und Kennzahlenspezifikation | ✅ ausgearbeitet |
-| Praktische Prüfung der Datenquellen | ⏳ als Nächstes |
 | Projektgerüst (Backend, Frontend) | ✅ angelegt |
 | Erster Durchstich: Kursimport (Alpha Vantage) und Kursdiagramm | ✅ umgesetzt |
-| Finanzberichte (SEC EDGAR), Kennzahlen, Vergleich, Datenbank | ⬜ noch nicht begonnen |
+| Datenbank (PostgreSQL) mit versionierten Migrationen für Kursdaten | ✅ umgesetzt |
+| Praktische Prüfung der Datenquellen (Alpha Vantage, SEC EDGAR) | ✅ weitgehend abgeschlossen |
+| Finanzberichte (SEC EDGAR), Kennzahlen, Vergleich | ⬜ noch nicht begonnen |
 | Datenimport | ⬜ noch nicht begonnen |
 | Automatisierte Tests | ⬜ noch nicht begonnen |
 | Evaluation | ⬜ noch nicht begonnen |
@@ -116,9 +117,10 @@ flowchart LR
 | Schnittstelle | REST / JSON | festgelegt |
 | Datenbank | PostgreSQL | festgelegt |
 | Datenquellen | Alpha Vantage, SEC EDGAR | festgelegt |
-| Datenbankmigrationen | versionierte Migrationen, z. B. Flyway | vorgesehen |
-| Bereitstellung | containerisierte Einrichtung, z. B. Docker Compose | vorgesehen |
-| Tests | JUnit 5, Vitest, React Testing Library | festgelegt |
+| Datenbankmigrationen | Flyway | festgelegt |
+| Datenbankzugriff | Spring Data JPA (Hibernate) | festgelegt |
+| Bereitstellung | Docker Compose (Datenbank umgesetzt, Gesamtanwendung vorgesehen) | festgelegt |
+| Tests | JUnit 5, Testcontainers, Vitest, React Testing Library | festgelegt |
 
 *festgelegt* = entschieden · *vorgesehen* = geplant, die endgültige Auswahl erfolgt mit der Implementierung.
 Quellcode und Code-Kommentare werden auf Englisch verfasst.

@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * Test inputs. {@code alphavantage/time-series-daily-test.json} is a hand-made sample in Alpha Vantage's
  * TIME_SERIES_DAILY format with artificial values and the placeholder symbol TEST. It represents no real
- * company and is only used to test the reading code (decision 2026-11-06, option A).
+ * company and is only used to test the reading code.
  */
 public final class TestData {
 

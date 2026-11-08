@@ -11,8 +11,8 @@ export const TEST_SERIES: PriceSeries = {
   asOf: '2026-01-06',
   retrievedAt: '2026-01-07T09:00:00Z',
   points: [
-    { date: '2026-01-05', open: '100.0000', high: '101.5000', low: '99.5000', close: '101.0000', volume: 1000 },
-    { date: '2026-01-06', open: '101.0000', high: '102.2500', low: '100.5000', close: '102.0000', volume: 2000 },
+    { date: '2026-01-05', open: '100.0000', high: '101.5000', low: '99.5000', close: '101.0000', volume: 1000, importRunId: 1 },
+    { date: '2026-01-06', open: '101.0000', high: '102.2500', low: '100.5000', close: '102.0000', volume: 2000, importRunId: 1 },
   ],
 }
 

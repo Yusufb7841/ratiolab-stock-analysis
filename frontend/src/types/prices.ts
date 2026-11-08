@@ -6,6 +6,8 @@ export type PricePoint = {
   low: string
   close: string
   volume: number
+  /** The import that stored this day (provenance). */
+  importRunId: number
 }
 
 export type PriceSeries = {

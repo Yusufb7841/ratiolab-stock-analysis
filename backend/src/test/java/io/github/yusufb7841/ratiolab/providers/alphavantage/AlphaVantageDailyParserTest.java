@@ -45,7 +45,7 @@ class AlphaVantageDailyParserTest {
 
 	@Test
 	void parse_informationMessageWithoutData_isRejectedAsProviderMessage() {
-		// Assumed shape of a limit/notice message (claim AV-4, to be verified in spike V-01).
+		// Assumed shape of a rate-limit message; a real one has not been observed yet.
 		assertRejected("{\"Information\": \"Please consider spreading out your requests.\"}", "PROVIDER_MESSAGE");
 	}
 

@@ -60,8 +60,9 @@ public class ImportCommand implements ApplicationRunner {
 			String ticker = tickers.get(i);
 			try {
 				PriceImportService.Result result = importService.importDailyPrices(ticker);
-				log.info("Imported {} trading days for {} ({} to {})", result.tradingDays(), ticker, result.firstDay(),
-						result.lastDay());
+				log.info("Imported {} ({} to {}): {} trading days received, {} new, {} already stored, run {}", ticker,
+						result.firstDay(), result.lastDay(), result.tradingDays(), result.inserted(),
+						result.alreadyStored(), result.importRunId());
 			}
 			catch (ProviderResponseException e) {
 				failures++;

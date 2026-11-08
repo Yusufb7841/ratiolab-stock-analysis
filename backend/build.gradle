@@ -20,7 +20,17 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-flyway'
+	implementation 'org.flywaydb:flyway-database-postgresql'
+	runtimeOnly 'org.postgresql:postgresql'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-flyway-test'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
+	testImplementation 'org.testcontainers:testcontainers-postgresql'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
@@ -39,13 +49,22 @@ base {
 // the REST API. During development the Vite dev server can still be used.
 // ---------------------------------------------------------------------------
 def frontendDir = rootProject.file('frontend')
-def npm = System.getProperty('os.name').toLowerCase().contains('windows') ? 'npm.cmd' : 'npm'
+
+// Find npm. IDEs started from the macOS Dock (e.g. IntelliJ) run Gradle without the terminal's PATH,
+// so the usual Homebrew locations are checked as well. npm also needs node from the same folder.
+def isWindows = System.getProperty('os.name').toLowerCase().contains('windows')
+def npmFileName = isWindows ? 'npm.cmd' : 'npm'
+def searchDirs = (System.getenv('PATH') ?: '').split(File.pathSeparator).toList() + ['/opt/homebrew/bin', '/usr/local/bin']
+def npmFile = searchDirs.collect { new File(it, npmFileName) }.find { it.canExecute() }
+def npm = npmFile ? npmFile.absolutePath : npmFileName
+def pathWithNode = (npmFile ? npmFile.parent + File.pathSeparator : '') + (System.getenv('PATH') ?: '')
 
 def npmInstall = tasks.register('npmInstall', Exec) {
 	group = 'frontend'
 	description = 'Installs the frontend dependencies exactly as locked (npm ci).'
 	workingDir = frontendDir
 	commandLine npm, 'ci', '--no-fund', '--no-audit'
+	environment 'PATH', pathWithNode
 	inputs.files(new File(frontendDir, 'package.json'), new File(frontendDir, 'package-lock.json'))
 	outputs.dir(new File(frontendDir, 'node_modules'))
 }
@@ -56,6 +75,7 @@ def frontendBuild = tasks.register('frontendBuild', Exec) {
 	dependsOn npmInstall
 	workingDir = frontendDir
 	commandLine npm, 'run', 'build'
+	environment 'PATH', pathWithNode
 	inputs.dir(new File(frontendDir, 'src'))
 	inputs.files(fileTree(frontendDir) { include '*.json', '*.ts', '*.js', 'index.html' })
 	outputs.dir(new File(frontendDir, 'dist'))
@@ -67,6 +87,7 @@ def frontendTest = tasks.register('frontendTest', Exec) {
 	dependsOn npmInstall
 	workingDir = frontendDir
 	commandLine npm, 'test'
+	environment 'PATH', pathWithNode
 }
 
 // Spring Boot serves everything under classpath:/static at the root URL.

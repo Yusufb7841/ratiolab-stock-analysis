@@ -20,7 +20,7 @@ import tools.jackson.databind.json.JsonMapper;
  * Reads and validates an Alpha Vantage TIME_SERIES_DAILY response. Any problem rejects the whole
  * response, so no partial or guessed data are stored.
  * <p>
- * Format as observed in spike V-02 (2026-11-06): values are JSON strings with 4 decimals, field names
+ * Format as observed in real responses (2026-11-06): values are JSON strings with 4 decimals, field names
  * carry numeric prefixes ("1. open"), days arrive newest first.
  */
 @Component
@@ -45,7 +45,8 @@ public class AlphaVantageDailyParser {
 		}
 		JsonNode series = root.path(TIME_SERIES);
 		if (series.isMissingNode()) {
-			// Assumption AV-4 (not yet verified, spike V-01): limit messages arrive as "Note" or "Information".
+			// Observed: provider notices arrive as HTTP 200 with "Information".
+			// Assumed (not seen yet): rate-limit messages look the same or use "Note".
 			for (String messageField : List.of("Note", "Information")) {
 				if (root.has(messageField)) {
 					throw new ProviderResponseException("PROVIDER_MESSAGE", root.path(messageField).asString());

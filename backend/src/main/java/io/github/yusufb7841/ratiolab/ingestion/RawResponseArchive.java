@@ -20,7 +20,7 @@ import tools.jackson.databind.json.JsonMapper;
 
 /**
  * Keeps every raw Alpha Vantage response with a metadata file (time, request without key, checksum)
- * under {@code <dataDir>/alphavantage/<yyyy-MM-dd>/}. Same layout as spike V-02.
+ * under {@code <dataDir>/alphavantage/<yyyy-MM-dd>/}.
  */
 @Component
 class RawResponseArchive {

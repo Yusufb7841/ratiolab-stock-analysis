@@ -1,6 +1,5 @@
 package io.github.yusufb7841.ratiolab.prices;
 
-import io.github.yusufb7841.ratiolab.company.CompanyDirectory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,18 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class PriceController {
 
-	private final CompanyDirectory companies;
+	private final PriceQueryService prices;
 
-	private final PriceSnapshotStore store;
-
-	PriceController(CompanyDirectory companies, PriceSnapshotStore store) {
-		this.companies = companies;
-		this.store = store;
+	PriceController(PriceQueryService prices) {
+		this.prices = prices;
 	}
 
 	@GetMapping("/api/v1/companies/{ticker}/prices")
 	PriceSeriesResponse prices(@PathVariable String ticker) {
-		companies.requireSupported(ticker);
-		return store.latest(ticker).map(PriceSeriesResponse::from).orElseGet(() -> PriceSeriesResponse.empty(ticker));
+		return prices.dailyPrices(ticker);
 	}
 }
