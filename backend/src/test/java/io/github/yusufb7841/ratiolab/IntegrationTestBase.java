@@ -51,7 +51,7 @@ public abstract class IntegrationTestBase {
 
 	@BeforeEach
 	void resetDatabaseAndClock() {
-		jdbc.sql("TRUNCATE daily_price, import_run, company RESTART IDENTITY CASCADE").update();
+		jdbc.sql("TRUNCATE financial_fact, daily_price, import_run, company RESTART IDENTITY CASCADE").update();
 		when(clock.instant()).thenReturn(NOW);
 	}
 

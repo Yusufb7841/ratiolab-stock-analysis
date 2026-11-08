@@ -1,0 +1,50 @@
+{
+  "cik": 0,
+  "entityName": "Test Company (artificial data)",
+  "facts": {
+    "dei": {
+      "EntityCommonStockSharesOutstanding": {
+        "label": "Entity Common Stock, Shares Outstanding",
+        "description": "Artificial test value.",
+        "units": {
+          "shares": [
+            {"end": "2025-10-15", "val": 5000, "accn": "0000000000-25-000010", "fy": 2025, "fp": "FY", "form": "10-K", "filed": "2025-11-01"}
+          ]
+        }
+      }
+    },
+    "us-gaap": {
+      "AccountsPayableCurrent": {
+        "label": "Accounts Payable, Current",
+        "description": "Artificial test value.",
+        "units": {
+          "USD": [
+            {"end": "2025-09-30", "val": 700, "accn": "0000000000-25-000010", "fy": 2025, "fp": "FY", "form": "10-K", "filed": "2025-11-01", "frame": "CY2025Q3I"}
+          ]
+        }
+      },
+      "Revenues": {
+        "label": "Revenues",
+        "description": "Artificial test values.",
+        "units": {
+          "USD": [
+            {"start": "2023-10-01", "end": "2024-09-30", "val": 1000000, "accn": "0000000000-24-000010", "fy": 2024, "fp": "FY", "form": "10-K", "filed": "2024-11-01"},
+            {"start": "2023-10-01", "end": "2024-09-30", "val": 1000500, "accn": "0000000000-25-000010", "fy": 2025, "fp": "FY", "form": "10-K", "filed": "2025-11-01"},
+            {"start": "2024-10-01", "end": "2025-09-30", "val": 1100000, "accn": "0000000000-25-000010", "fy": 2025, "fp": "FY", "form": "10-K", "filed": "2025-11-01", "frame": "CY2025"},
+            {"start": "2025-10-01", "end": "2025-12-31", "val": 300000, "accn": "0000000000-26-000002", "fy": 2026, "fp": "Q1", "form": "10-Q", "filed": "2026-01-30", "frame": "CY2025Q4"}
+          ]
+        }
+      },
+      "EarningsPerShareDiluted": {
+        "label": "Earnings Per Share, Diluted",
+        "description": "Artificial test values.",
+        "units": {
+          "USD/shares": [
+            {"start": "2023-10-01", "end": "2024-09-30", "val": 1.1, "accn": "0000000000-24-000010", "fy": 2024, "fp": "FY", "form": "10-K", "filed": "2024-11-01"},
+            {"start": "2024-10-01", "end": "2025-09-30", "val": 1.23, "accn": "0000000000-25-000010", "fy": 2025, "fp": "FY", "form": "10-K", "filed": "2025-11-01", "frame": "CY2025"}
+          ]
+        }
+      }
+    }
+  }
+}

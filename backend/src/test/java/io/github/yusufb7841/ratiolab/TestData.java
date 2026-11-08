@@ -6,13 +6,16 @@ import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Test inputs. {@code alphavantage/time-series-daily-test.json} is a hand-made sample in Alpha Vantage's
- * TIME_SERIES_DAILY format with artificial values and the placeholder symbol TEST. It represents no real
- * company and is only used to test the reading code.
+ * Test inputs: hand-made samples in the providers' formats with artificial values. They represent no real
+ * company and are only used to test the reading code.
  */
 public final class TestData {
 
+	/** Alpha Vantage TIME_SERIES_DAILY, placeholder symbol TEST. */
 	public static final String SAMPLE_DAILY_RESPONSE = "alphavantage/time-series-daily-test.json";
+
+	/** SEC companyfacts, placeholder CIK 0. Revenue for FY2024 is reported twice (original and restated). */
+	public static final String SAMPLE_COMPANY_FACTS = "sec/companyfacts-test.json";
 
 	private TestData() {
 	}

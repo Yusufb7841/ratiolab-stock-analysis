@@ -8,9 +8,11 @@ class RatiolabApplicationTests extends IntegrationTestBase {
 
 	@Test
 	void contextLoads_andFlywayCreatedTheSchema() {
-		assertThat(count("SELECT count(*) FROM flyway_schema_history WHERE version = '1' AND success")).isEqualTo(1);
+		assertThat(count("SELECT count(*) FROM flyway_schema_history WHERE version IN ('1', '2') AND success"))
+			.isEqualTo(2);
 		assertThat(count("""
 				SELECT count(*) FROM information_schema.tables
-				WHERE table_schema = 'public' AND table_name IN ('company', 'import_run', 'daily_price')""")).isEqualTo(3);
+				WHERE table_schema = 'public'
+				AND table_name IN ('company', 'import_run', 'daily_price', 'financial_fact')""")).isEqualTo(4);
 	}
 }
