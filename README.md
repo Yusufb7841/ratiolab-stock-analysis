@@ -62,7 +62,8 @@ Der Schwerpunkt liegt auf Softwarearchitektur, zuverlässiger Datenverarbeitung,
 | Datenbank (PostgreSQL) mit versionierten Migrationen für Kurse und Finanzdaten | ✅ umgesetzt |
 | Praktische Prüfung der Datenquellen (Alpha Vantage, SEC EDGAR) | ✅ weitgehend abgeschlossen |
 | Datenimport per Befehl: Kurse (Alpha Vantage) und Finanzberichtsdaten (SEC EDGAR) | ✅ umgesetzt (Anfragebudget für Alpha Vantage folgt) |
-| Auswahl der Jahreswerte, Kennzahlen, Vergleich | ⬜ noch nicht begonnen |
+| Auswahl der Jahreswerte aus den SEC-Daten | 🔄 Regeln umgesetzt und getestet, Anzeige folgt |
+| Kennzahlen, Vergleich | ⬜ noch nicht begonnen |
 | Automatisierte Tests (Backend gegen PostgreSQL, Frontend) | 🔄 laufend, wachsen mit jeder Funktion |
 | Evaluation | ⬜ noch nicht begonnen |
 
