@@ -13,6 +13,9 @@ import jakarta.persistence.Table;
 @Table(name = "financial_fact")
 public class FinancialFact {
 
+	/** All facts come from SEC EDGAR. */
+	public static final String PROVIDER = "SEC_EDGAR";
+
 	@EmbeddedId
 	private FinancialFactKey id;
 

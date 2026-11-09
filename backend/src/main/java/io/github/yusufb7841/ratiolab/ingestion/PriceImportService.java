@@ -79,7 +79,9 @@ public class PriceImportService {
 						"Requested " + ticker + " but the response is for " + series.symbol());
 			}
 			String sha256 = RawResponseArchive.sha256(response.body());
-			archive.store(ticker, response, retrievedAt, sha256);
+			archive.store("alphavantage", ticker + "_TIME_SERIES_DAILY_compact",
+					"https://www.alphavantage.co/query?" + AlphaVantageClient.DAILY_REQUEST.formatted(ticker),
+					response.httpStatus(), response.body(), retrievedAt, sha256);
 
 			int inserted = transaction.execute(status -> storeNewDays(company, series, run, retrievedAt, sha256));
 			return new Result(ticker, run.getId(), series.prices().size(), inserted, series.prices().size() - inserted,

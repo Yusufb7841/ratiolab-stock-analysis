@@ -10,6 +10,7 @@ import java.time.Clock;
 import java.time.Instant;
 
 import io.github.yusufb7841.ratiolab.providers.alphavantage.AlphaVantageClient;
+import io.github.yusufb7841.ratiolab.providers.sec.SecClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,8 +22,8 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 /**
- * Shared setup for tests with the whole application: a real PostgreSQL (Testcontainers), a faked Alpha
- * Vantage client (no network), a fixed clock and placeholder tickers. All subclasses share one Spring
+ * Shared setup for tests with the whole application: a real PostgreSQL (Testcontainers), faked Alpha
+ * Vantage and SEC clients (no network), a fixed clock and placeholder tickers. All subclasses share one Spring
  * context and therefore one database container; tables are emptied before each test.
  */
 @SpringBootTest
@@ -38,10 +39,16 @@ public abstract class IntegrationTestBase {
 	static void properties(DynamicPropertyRegistry registry) {
 		registry.add("ratiolab.data-dir", DATA_DIR::toString);
 		registry.add("ratiolab.companies", () -> "TEST,OTHER,NODATA");
+		// Placeholder CIKs; NODATA has none on purpose.
+		registry.add("ratiolab.sec.ciks.TEST", () -> "0000000000");
+		registry.add("ratiolab.sec.ciks.OTHER", () -> "0000000001");
 	}
 
 	@MockitoBean
 	protected AlphaVantageClient alphaVantage;
+
+	@MockitoBean
+	protected SecClient secClient;
 
 	@MockitoBean
 	protected Clock clock;

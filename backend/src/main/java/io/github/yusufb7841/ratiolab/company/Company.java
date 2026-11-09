@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/** A configured company (table {@code company}). CIK and name are filled by the SEC import later. */
+/** A configured company (table {@code company}). CIK and name are filled by the SEC import. */
 @Entity
 @Table(name = "company")
 public class Company {
@@ -27,6 +27,12 @@ public class Company {
 
 	public Company(String ticker) {
 		this.ticker = ticker;
+	}
+
+	/** Sets the SEC company number and the name under which the company reports to SEC. */
+	public void updateFromSec(String cik, String name) {
+		this.cik = cik;
+		this.name = name;
 	}
 
 	public Long getId() {

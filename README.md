@@ -23,7 +23,7 @@ RatioLab entsteht im Rahmen einer Bachelorarbeit im Studiengang Informatik (B.Sc
 > **Entwicklung und Evaluation einer webbasierten Anwendung zur fundamentalen Aktienanalyse**
 
 > [!IMPORTANT]
-> **Die Implementierung steht am Anfang.** Anforderungen, Architektur und die Spezifikation der Daten und Kennzahlen sind ausgearbeitet. Umgesetzt sind bisher das **Projektgerüst** und ein **erster Durchstich**: ein Importbefehl lädt echte Tageskurse von Alpha Vantage, die Oberfläche zeigt sie als Diagramm mit Quelle und Datenstand. Alle übrigen beschriebenen Funktionen sind **geplant**, nicht umgesetzt.
+> **Die Implementierung ist in Arbeit.** Anforderungen, Architektur und die Spezifikation der Daten und Kennzahlen sind ausgearbeitet. Umgesetzt sind bisher das **Projektgerüst**, zwei **Importbefehle**, die echte Tageskurse (Alpha Vantage) und gemeldete Finanzberichtsdaten (SEC EDGAR) mit Herkunftsnachweis in PostgreSQL speichern, sowie ein **Kursdiagramm** mit Quelle und Datenstand. Alle übrigen beschriebenen Funktionen sind **geplant**, nicht umgesetzt.
 
 ## Inhalt
 
@@ -59,11 +59,11 @@ Der Schwerpunkt liegt auf Softwarearchitektur, zuverlässiger Datenverarbeitung,
 | Anforderungen, Architektur, Daten- und Kennzahlenspezifikation | ✅ ausgearbeitet |
 | Projektgerüst (Backend, Frontend) | ✅ angelegt |
 | Erster Durchstich: Kursimport (Alpha Vantage) und Kursdiagramm | ✅ umgesetzt |
-| Datenbank (PostgreSQL) mit versionierten Migrationen für Kursdaten | ✅ umgesetzt |
+| Datenbank (PostgreSQL) mit versionierten Migrationen für Kurse und Finanzdaten | ✅ umgesetzt |
 | Praktische Prüfung der Datenquellen (Alpha Vantage, SEC EDGAR) | ✅ weitgehend abgeschlossen |
-| Finanzberichte (SEC EDGAR), Kennzahlen, Vergleich | ⬜ noch nicht begonnen |
-| Datenimport | ⬜ noch nicht begonnen |
-| Automatisierte Tests | ⬜ noch nicht begonnen |
+| Datenimport per Befehl: Kurse (Alpha Vantage) und Finanzberichtsdaten (SEC EDGAR) | ✅ umgesetzt (Anfragebudget für Alpha Vantage folgt) |
+| Auswahl der Jahreswerte, Kennzahlen, Vergleich | ⬜ noch nicht begonnen |
+| Automatisierte Tests (Backend gegen PostgreSQL, Frontend) | 🔄 laufend, wachsen mit jeder Funktion |
 | Evaluation | ⬜ noch nicht begonnen |
 
 ---

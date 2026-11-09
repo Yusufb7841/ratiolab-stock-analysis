@@ -14,43 +14,46 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import io.github.yusufb7841.ratiolab.common.RatioLabProperties;
-import io.github.yusufb7841.ratiolab.providers.alphavantage.AlphaVantageClient;
 import org.springframework.stereotype.Component;
 import tools.jackson.databind.json.JsonMapper;
 
 /**
- * Keeps every raw Alpha Vantage response with a metadata file (time, request without key, checksum)
- * under {@code <dataDir>/alphavantage/<yyyy-MM-dd>/}.
+ * Keeps every raw provider response unchanged, with a metadata file (request without secrets, time,
+ * HTTP status, size, checksum), under {@code <dataDir>/<folder>/<yyyy-MM-dd>/}.
  */
 @Component
 class RawResponseArchive {
 
-	private final Path archiveDir;
+	private final Path dataDir;
 
 	private final JsonMapper json;
 
 	RawResponseArchive(RatioLabProperties properties, JsonMapper json) {
-		this.archiveDir = properties.dataDir().resolve("alphavantage");
+		this.dataDir = properties.dataDir();
 		this.json = json;
 	}
 
-	void store(String ticker, AlphaVantageClient.FetchResult response, Instant retrievedAt, String sha256) {
+	/**
+	 * @param folder   one folder per provider, e.g. {@code alphavantage} or {@code sec}
+	 * @param fileName e.g. {@code AAPL_companyfacts}
+	 * @param request  what was requested, never including a secret
+	 */
+	void store(String folder, String fileName, String request, int httpStatus, String body, Instant retrievedAt,
+			String sha256) {
 		try {
-			Path dir = Files.createDirectories(archiveDir.resolve(retrievedAt.atZone(ZoneOffset.UTC).toLocalDate().toString()));
-			String base = ticker + "_TIME_SERIES_DAILY_compact";
-			Files.writeString(dir.resolve(base + ".json"), response.body(), StandardCharsets.UTF_8);
+			String day = retrievedAt.atZone(ZoneOffset.UTC).toLocalDate().toString();
+			Path dir = Files.createDirectories(dataDir.resolve(folder).resolve(day));
+			Files.writeString(dir.resolve(fileName + ".json"), body, StandardCharsets.UTF_8);
 			Map<String, Object> meta = new LinkedHashMap<>();
-			meta.put("provider", "ALPHA_VANTAGE");
-			meta.put("symbol", ticker);
-			meta.put("request", "https://www.alphavantage.co/query?" + AlphaVantageClient.DAILY_REQUEST.formatted(ticker));
+			meta.put("request", request);
 			meta.put("retrievedAt", retrievedAt.toString());
-			meta.put("httpStatus", response.httpStatus());
-			meta.put("bytes", response.body().getBytes(StandardCharsets.UTF_8).length);
+			meta.put("httpStatus", httpStatus);
+			meta.put("bytes", body.getBytes(StandardCharsets.UTF_8).length);
 			meta.put("sha256", sha256);
-			json.writeValue(dir.resolve(base + ".meta.json").toFile(), meta);
+			json.writeValue(dir.resolve(fileName + ".meta.json").toFile(), meta);
 		}
 		catch (IOException e) {
-			throw new UncheckedIOException("Could not archive the raw response for " + ticker, e);
+			throw new UncheckedIOException("Could not archive the raw response " + fileName, e);
 		}
 	}
 
