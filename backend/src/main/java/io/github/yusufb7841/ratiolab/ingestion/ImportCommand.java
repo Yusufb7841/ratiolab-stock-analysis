@@ -1,7 +1,6 @@
 package io.github.yusufb7841.ratiolab.ingestion;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -43,13 +42,22 @@ public class ImportCommand implements ApplicationRunner {
 		this.companies = companies;
 	}
 
-	/** True if the program arguments ask for an import (first non-option argument). */
+	/**
+	 * True if the program arguments ask for an import (first non-option argument), false if there are only
+	 * options. Any other first word is rejected, so a typo stops the program instead of starting the web server.
+	 */
 	public static boolean isImportCommand(String[] args) {
-		return Arrays.stream(args)
-			.filter(a -> !a.startsWith("--"))
-			.findFirst()
-			.map(ImportCommand::isCommand)
-			.orElse(false);
+		for (String arg : args) {
+			if (arg.startsWith("--")) {
+				continue;
+			}
+			if (isCommand(arg)) {
+				return true;
+			}
+			throw new IllegalArgumentException(
+					"Unknown command \"" + arg + "\". Known commands: " + PRICES + ", " + FINANCIALS);
+		}
+		return false;
 	}
 
 	private static boolean isCommand(String word) {
